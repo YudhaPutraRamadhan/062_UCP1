@@ -5,12 +5,14 @@ const db = require('./models');
 
 app.use(express.json());
 app.use(express.urlencoded({ 
-    extended: true 
+    extended: false 
 }));
 
 db.sequelize.sync()
     .then((result) => {
-        console.log(`Server is running on http://localhost:${PORT}`);
+        app.listen(PORT, () => {
+            console.log(`Server is running on http://localhost:${PORT}`);
+        })
     })
     .catch((err) => {
         console.log(err);
